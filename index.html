@@ -78,6 +78,7 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .ink :focus-visible{outline-color:var(--paper)}
 
+html{scrollbar-color:var(--ink) var(--paper)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:var(--paper)}
 ::-webkit-scrollbar-thumb{background:var(--ink)}
@@ -265,7 +266,7 @@ section[id]{scroll-margin-top:96px}
   display:block;font-family:var(--font-stamp);font-weight:400;
   font-size:clamp(48px,11vw,132px);line-height:.75;font-variant-numeric:tabular-nums;
 }
-.countdown__label{display:block;margin-top:var(--sp-8);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.6}
+.countdown__label{display:block;margin-top:var(--sp-8);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.72}
 .countdown--live{display:block;padding-top:var(--sp-24);font-family:var(--font-serif);font-size:var(--text-heading-lg);line-height:.9}
 
 /* ============================================================
@@ -287,9 +288,11 @@ section[id]{scroll-margin-top:96px}
   gap:var(--sp-24);margin-bottom:var(--sp-24);
 }
 .daytabs{display:flex;align-items:baseline;gap:var(--sp-24)}
+/* Pebble is the token for inactive nav text, but it fails AA on paper (2.3:1),
+   so inactive tabs use Ash (5.7:1). Pebble stays on borders only. */
 .daytab{
   font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px;
-  color:var(--pebble);padding-bottom:var(--sp-4);border-bottom:1px solid transparent;
+  color:var(--ash);padding-bottom:var(--sp-4);border-bottom:1px solid transparent;
 }
 .daytab[aria-selected="true"]{font-size:var(--text-subheading);color:var(--ink);border-bottom-color:var(--ink)}
 
@@ -320,7 +323,15 @@ section[id]{scroll-margin-top:96px}
 .session__aside{display:flex;align-items:flex-start;justify-content:flex-start;gap:var(--sp-8)}
 @media (min-width:760px){.session__aside{justify-content:flex-end;padding-top:2px}}
 .session__sign{font-family:var(--font-serif);font-size:var(--text-subheading);line-height:1;width:1ch}
-.session__panel{overflow:hidden;height:0;transition:height .28s cubic-bezier(.2,.7,.3,1)}
+/* visibility (not just height:0) keeps collapsed detail out of the accessibility tree. */
+.session__panel{
+  overflow:hidden;height:0;visibility:hidden;
+  transition:height .28s cubic-bezier(.2,.7,.3,1),visibility 0s linear .28s;
+}
+.session__panel.is-open{
+  visibility:visible;
+  transition:height .28s cubic-bezier(.2,.7,.3,1),visibility 0s linear 0s;
+}
 .session__body{padding:0 0 var(--sp-24)}
 @media (min-width:760px){.session__body{padding-left:174px;max-width:70ch}}
 .session__room{margin-top:var(--sp-12);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
@@ -341,7 +352,7 @@ section[id]{scroll-margin-top:96px}
    EDITORIAL LETTER
    ============================================================ */
 .letter{padding-block:var(--section-gap);text-align:center}
-.letter__eyebrow{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.6}
+.letter__eyebrow{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.72}
 .letter__body{
   font-family:var(--font-serif);font-size:clamp(22px,3.2vw,32px);line-height:1.2;
   max-width:24ch;margin:var(--sp-32) auto;
@@ -396,7 +407,7 @@ section[id]{scroll-margin-top:96px}
 }
 .figure__num{font-family:var(--font-serif);font-size:clamp(56px,8vw,132px);line-height:.8;font-variant-numeric:tabular-nums;display:block}
 .figure__name{margin-top:var(--sp-12);font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px}
-.figure__note{margin-top:var(--sp-4);font-size:var(--text-caption);letter-spacing:-0.12px;opacity:.6;max-width:28ch}
+.figure__note{margin-top:var(--sp-4);font-size:var(--text-caption);letter-spacing:-0.12px;opacity:.72;max-width:28ch}
 
 /* ============================================================
    VENUE
@@ -465,7 +476,7 @@ section[id]{scroll-margin-top:96px}
   border:1px solid var(--midstone);border-radius:var(--radius);
   padding:var(--sp-12) var(--sp-16);font-size:var(--text-body);
 }
-.input::placeholder{color:var(--pebble)}
+.input::placeholder{color:var(--ash)}
 .input:focus-visible,.select:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;border-color:var(--ink)}
 .select{
   appearance:none;padding-right:40px;cursor:pointer;
@@ -560,6 +571,10 @@ section[id]{scroll-margin-top:96px}
   .session__panel{height:auto!important}
 }
 </style>
+
+<noscript><style>
+  .reveal{opacity:1;transform:none}
+</style></noscript>
 </head>
 <body>
 
@@ -589,7 +604,7 @@ section[id]{scroll-margin-top:96px}
       <a href="#figures">Figures</a>
       <a href="#venue">Venue</a>
     </nav>
-    <button class="btn" data-open-register>Register now</button>
+    <button class="btn" data-open-register aria-haspopup="dialog">Register now</button>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="drawer">Menu</button>
   </div>
   <div class="drawer" id="drawer">
@@ -599,7 +614,7 @@ section[id]{scroll-margin-top:96px}
       <li><a href="#figures">Figures</a></li>
       <li><a href="#venue">Venue</a></li>
     </ul>
-    <button class="btn btn--lg" data-open-register style="width:100%">Register now</button>
+    <button class="btn btn--lg" data-open-register aria-haspopup="dialog" style="width:100%">Register now</button>
   </div>
 </header>
 
@@ -619,7 +634,7 @@ section[id]{scroll-margin-top:96px}
           <dt>Admission</dt><dd>Benilde students, free</dd>
         </dl>
         <div class="hero__actions">
-          <button class="btn btn--lg" data-open-register>Register now</button>
+          <button class="btn btn--lg" data-open-register aria-haspopup="dialog">Register now</button>
           <a class="btn btn--lg btn--ghost" href="#programme">View the programme</a>
         </div>
       </div>
@@ -632,7 +647,7 @@ section[id]{scroll-margin-top:96px}
   <!-- ============ COUNTDOWN (INK) ============ -->
   <section class="ink band band--tall">
     <div class="shell">
-      <p class="eyebrow" style="opacity:.6">The doors open in</p>
+      <p class="eyebrow" style="opacity:.72">The doors open in</p>
       <div class="countdown" id="countdown" aria-live="off">
         <div class="countdown__cell"><span class="countdown__num" id="cd-days">—</span><span class="countdown__label">Days</span></div>
         <div class="countdown__cell"><span class="countdown__num" id="cd-hours">—</span><span class="countdown__label">Hours</span></div>
@@ -657,7 +672,7 @@ section[id]{scroll-margin-top:96px}
         <button role="tab" class="daytab" id="tab-d1" aria-selected="true" aria-controls="panel-d1" tabindex="0">Day One — 18 Sept</button>
         <button role="tab" class="daytab" id="tab-d2" aria-selected="false" aria-controls="panel-d2" tabindex="-1">Day Two — 19 Sept</button>
       </div>
-      <div class="filters" id="filters">
+      <div class="filters" id="filters" role="group" aria-labelledby="filters-label">
         <span class="filters__label" id="filters-label">Track</span>
         <button class="chip" data-track="all" aria-pressed="true">All</button>
         <button class="chip" data-track="Engineering" aria-pressed="false">Engineering</button>
@@ -669,7 +684,7 @@ section[id]{scroll-margin-top:96px}
 
     <p class="count" id="session-count" aria-live="polite"></p>
 
-    <div id="panel-d1" role="tabpanel" tabindex="0" aria-labelledby="tab-d1"></div>
+    <div id="panel-d1" role="tabpanel" tabindex="0" aria-labelledby="tab-d1"><noscript><p class="empty">The interactive programme needs JavaScript. Both days run 09:00&thinsp;&mdash;&thinsp;17:00 with fourteen sessions across the Engineering, Design, Career and Workshop tracks.</p></noscript></div>
     <div id="panel-d2" role="tabpanel" tabindex="0" aria-labelledby="tab-d2" hidden></div>
   </section>
 
@@ -691,13 +706,13 @@ section[id]{scroll-margin-top:96px}
   </section>
 
   <section class="band shell band--tall">
-    <div class="speakers" id="speakers-grid"></div>
+    <div class="speakers" id="speakers-grid"><noscript><p class="empty">Speaker profiles need JavaScript. Six speakers are confirmed across engineering, design, AI and career tracks.</p></noscript></div>
   </section>
 
   <!-- ============ FIGURES (INK) ============ -->
   <section id="figures" class="ink band band--tall">
     <div class="shell">
-      <p class="eyebrow" style="opacity:.6">The summit in figures</p>
+      <p class="eyebrow" style="opacity:.72">The summit in figures</p>
       <h2 class="sr-only">Synthesis 2026 in figures</h2>
       <div class="figures">
         <div class="figure">
@@ -759,9 +774,9 @@ section[id]{scroll-margin-top:96px}
   <!-- ============ CLOSING (INK) ============ -->
   <section class="ink band closing">
     <div class="shell">
-      <p class="eyebrow" style="opacity:.6">Four hundred seats</p>
+      <p class="eyebrow" style="opacity:.72">Four hundred seats</p>
       <h2 class="display closing__title" style="margin-top:var(--sp-24)">Take one <em>before they go</em></h2>
-      <button class="btn btn--lg" data-open-register>Register now</button>
+      <button class="btn btn--lg" data-open-register aria-haspopup="dialog">Register now</button>
     </div>
   </section>
 
@@ -918,7 +933,7 @@ section[id]{scroll-margin-top:96px}
 
       <div class="stub">
         <div class="stub__top">
-          <p class="eyebrow" style="opacity:.6">Confirmation</p>
+          <p class="eyebrow" style="opacity:.72">Confirmation</p>
           <p class="stub__code" id="s-code"></p>
         </div>
         <dl class="stub__rows">
@@ -1083,7 +1098,15 @@ section[id]{scroll-margin-top:96px}
       document.body.style.width = '';
       window.scrollTo(0, scrollY);
 
-      if (lastFocused && document.contains(lastFocused)) lastFocused.focus({ preventScroll: true });
+      // The opener can be gone or hidden by now (e.g. the mobile drawer closed
+      // behind the dialog), so fall back to a control that is actually visible.
+      var visible = function (el) { return el && document.contains(el) && el.getClientRects().length > 0; };
+      if (visible(lastFocused)) lastFocused.focus({ preventScroll: true });
+      else {
+        var fallback = document.getElementById('nav-toggle');
+        if (!visible(fallback)) fallback = document.querySelector('.masthead [data-open-register]');
+        if (visible(fallback)) fallback.focus({ preventScroll: true });
+      }
       lastFocused = null;
     }
 
@@ -1120,9 +1143,16 @@ section[id]{scroll-margin-top:96px}
     toggle.addEventListener('click', function () {
       setDrawer(toggle.getAttribute('aria-expanded') !== 'true');
     });
-    $$('#drawer a').forEach(function (a) {
-      a.addEventListener('click', function () { setDrawer(false); });
+    $$('#drawer a, #drawer button').forEach(function (el) {
+      el.addEventListener('click', function () { setDrawer(false); });
     });
+
+    // Above the breakpoint the drawer is hidden by CSS — keep its state honest
+    // so aria-expanded and the toggle label don't desync on resize.
+    var wide = window.matchMedia('(min-width: 861px)');
+    var onWide = function (e) { if (e.matches) setDrawer(false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide);
+    else if (wide.addListener) wide.addListener(onWide);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true' && !Dialog.isOpen()) {
         setDrawer(false);
@@ -1274,27 +1304,28 @@ section[id]{scroll-margin-top:96px}
 
       // Only one session open at a time, per panel.
       var panel = btn.closest('[role="tabpanel"]');
-      $$('.session__head[aria-expanded="true"]', panel).forEach(function (other) {
-        if (other === btn) return;
-        other.setAttribute('aria-expanded', 'false');
-        $('.session__sign', other).textContent = '+';
-        var r = document.getElementById(other.getAttribute('aria-controls'));
+      function collapse(head) {
+        head.setAttribute('aria-expanded', 'false');
+        $('.session__sign', head).textContent = '+';
+        var r = document.getElementById(head.getAttribute('aria-controls'));
         r.style.height = r.scrollHeight + 'px';
         void r.offsetHeight;
         r.style.height = '0px';
+        r.classList.remove('is-open');
+      }
+
+      $$('.session__head[aria-expanded="true"]', panel).forEach(function (other) {
+        if (other !== btn) collapse(other);
       });
 
       if (isOpen) {
-        btn.setAttribute('aria-expanded', 'false');
-        sign.textContent = '+';
-        region.style.height = region.scrollHeight + 'px';
-        void region.offsetHeight;
-        region.style.height = '0px';
+        collapse(btn);
       } else {
         btn.setAttribute('aria-expanded', 'true');
         sign.textContent = '−';
+        region.classList.add('is-open');
         region.style.height = region.scrollHeight + 'px';
-        // Release the fixed height once open so reflow (resize, font swap) is handled.
+        // Release the fixed height once open so later reflow (resize, font swap) is handled.
         window.setTimeout(function () {
           if (btn.getAttribute('aria-expanded') === 'true') region.style.height = 'auto';
         }, reduceMotion.matches ? 0 : 300);
@@ -1549,8 +1580,13 @@ section[id]{scroll-margin-top:96px}
       name: function () {
         var v = fields.name.input.value.trim().replace(/\s+/g, ' ');
         if (!v) return 'Please enter your full name.';
-        if (v.split(' ').length < 2) return 'Please give both a first and a last name.';
-        if (v.length < 4) return 'That name looks too short — please check it.';
+        // Letters, marks, apostrophes, hyphens and full stops — so "Ma. Cristina Dela Cruz"
+        // and "Niño Sy-Reyes" pass while "1 2" does not.
+        if (!/^[\p{L}\p{M}'.\-\s]+$/u.test(v)) return 'Please use letters only — no digits or symbols.';
+        if (v.split(' ').filter(function (part) { return /\p{L}/u.test(part); }).length < 2) {
+          return 'Please give both a first and a last name.';
+        }
+        if (v.length > 80) return 'That name is longer than we can print on a badge.';
         return null;
       },
       id: function () {
@@ -1585,10 +1621,10 @@ section[id]{scroll-margin-top:96px}
       var f = fields[key];
       f.wrap.classList.toggle('is-invalid', !!message);
       f.error.textContent = message ? '✕ ' + message : '';
-      if (f.input) {
-        if (message) f.input.setAttribute('aria-invalid', 'true');
-        else f.input.removeAttribute('aria-invalid');
-      }
+      // For grouped controls (the day checkboxes) mark the group itself.
+      var flagged = f.input || $('[role="group"]', f.wrap) || f.wrap;
+      if (message) flagged.setAttribute('aria-invalid', 'true');
+      else flagged.removeAttribute('aria-invalid');
     }
 
     function validate(key) {
@@ -1602,7 +1638,14 @@ section[id]{scroll-margin-top:96px}
       var input = fields[key].input;
       if (!input) return;
       var eventName = input.tagName === 'SELECT' || input.type === 'checkbox' ? 'change' : 'blur';
-      input.addEventListener(eventName, function () { validate(key); });
+      input.addEventListener(eventName, function () {
+        // Don't scold someone for tabbing past a field they haven't filled in yet —
+        // only validate on blur once it's dirty, or already flagged.
+        var dirty = input.type === 'checkbox' ? true : !!input.value.trim();
+        if (eventName === 'change' || dirty || fields[key].wrap.classList.contains('is-invalid')) {
+          validate(key);
+        }
+      });
       input.addEventListener('input', function () {
         if (fields[key].wrap.classList.contains('is-invalid')) validate(key);
       });
@@ -1655,9 +1698,19 @@ section[id]{scroll-margin-top:96px}
       return 'SYN26-' + out;
     }
 
+    var dialogEl = $('.dialog', scrim);
+
+    function clearErrors() {
+      Object.keys(RULES).forEach(function (key) { setError(key, null); });
+      summary.classList.remove('is-shown');
+      summary.textContent = '';
+    }
+
     function showSuccess(reg) {
       formView.hidden = true;
       successView.hidden = false;
+      // The dialog's accessible name must follow the visible heading.
+      dialogEl.setAttribute('aria-labelledby', 'success-title');
       $('#s-code').textContent = reg.code;
       $('#s-name').textContent = reg.name;
       $('#s-id').textContent = reg.studentId;
@@ -1669,12 +1722,19 @@ section[id]{scroll-margin-top:96px}
     function showForm() {
       successView.hidden = true;
       formView.hidden = false;
+      dialogEl.setAttribute('aria-labelledby', 'register-title');
     }
 
     openers.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var stored = readStored();
-        if (stored) showSuccess(stored); else showForm();
+        if (stored) {
+          showSuccess(stored);
+        } else {
+          // Typed values survive a close/reopen; stale error state does not.
+          clearErrors();
+          showForm();
+        }
         Dialog.open(scrim);
       });
     });
@@ -1736,9 +1796,8 @@ section[id]{scroll-margin-top:96px}
       clearStored();
       paintOpeners(false);
       form.reset();
-      Object.keys(RULES).forEach(function (key) { setError(key, null); });
+      clearErrors();
       $$('#interests .interest').forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
-      summary.classList.remove('is-shown');
       showForm();
       fields.name.input.focus();
     });
