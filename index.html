@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SYNTHESIS 2026 — DevSoc Tech Summit · De La Salle-College of Saint Benilde</title>
+<meta name="description" content="Where Benilde builds what's next. Two days of engineering, design and career programming from DevSoc and SMIT. September 18–19, 2026. 400 seats.">
+<meta name="theme-color" content="#fafafa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SYNTHESIS 2026 — DevSoc Tech Summit">
+<meta property="og:description" content="Where Benilde builds what's next. September 18–19, 2026 at De La Salle-College of Saint Benilde. 400 seats.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a2722'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='24' text-anchor='middle' fill='%23fafafa'%3ES%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS — warm monochrome broadside. No chromatic accent.
+   ============================================================ */
+:root{
+  --paper:#fafafa;
+  --hairline:#eeeeee;
+  --midstone:#9f9f9f;
+  --ash:#666666;
+  --pebble:#b3b3b3;
+  --sepia:#3e3b36;
+  --ink:#2a2722;
+
+  --font-ui:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --font-stamp:'Antonio','Arial Narrow',sans-serif;
+
+  --text-caption:12px;
+  --text-body:16px;
+  --text-subheading:20px;
+  --text-heading-sm:24px;
+  --text-heading:32px;
+  --text-heading-lg:clamp(40px,7vw,77px);
+  --text-display:clamp(52px,11.5vw,132px);
+  --text-display-xl:clamp(64px,21vw,371px);
+
+  --sp-4:4px;  --sp-8:8px;   --sp-12:12px; --sp-16:16px;
+  --sp-20:20px;--sp-24:24px; --sp-32:32px; --sp-64:64px;
+  --sp-80:80px;--sp-224:224px;
+
+  --radius:12px;
+  --gutter:clamp(20px,5vw,80px);
+  --section-gap:clamp(64px,9vw,96px);
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-ui);
+  font-size:var(--text-body);
+  line-height:1.5;
+  letter-spacing:-0.16px;
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:break-word;
+}
+body.is-locked{overflow:hidden}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ink);color:var(--paper)}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.ink :focus-visible{outline-color:var(--paper)}
+
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--paper)}
+::-webkit-scrollbar-thumb{background:var(--ink)}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+.skip-link{
+  position:absolute;left:var(--sp-16);top:-100px;z-index:80;
+  background:var(--ink);color:var(--paper);
+  padding:var(--sp-12) var(--sp-16);border-radius:var(--radius);
+  font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px;
+}
+.skip-link:focus{top:var(--sp-16)}
+
+/* Paper grain — keeps the printed feel without introducing a third surface. */
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   TYPOGRAPHIC PRIMITIVES
+   ============================================================ */
+.eyebrow{
+  font-size:var(--text-caption);font-weight:700;line-height:1.5;
+  letter-spacing:-0.12px;text-transform:uppercase;
+}
+.meta{
+  font-size:var(--text-caption);font-weight:400;line-height:1.5;
+  letter-spacing:-0.12px;text-transform:uppercase;color:var(--ash);
+}
+.serif{font-family:var(--font-serif);font-weight:400;font-optical-sizing:auto}
+.display{
+  font-family:var(--font-serif);font-weight:400;
+  font-size:var(--text-display);line-height:.8;letter-spacing:-0.02em;
+}
+.heading-lg{
+  font-family:var(--font-serif);font-weight:400;
+  font-size:var(--text-heading-lg);line-height:.9;letter-spacing:-0.015em;
+}
+.heading{
+  font-family:var(--font-serif);font-weight:400;
+  font-size:var(--text-heading);line-height:1.1;letter-spacing:-0.32px;
+}
+.prose{font-size:var(--text-body);line-height:1.5;letter-spacing:-0.16px;color:var(--sepia)}
+
+/* ============================================================
+   SURFACES / LAYOUT
+   ============================================================ */
+.ink{background:var(--ink);color:var(--paper)}
+.band{padding-inline:var(--gutter)}
+.band--tall{padding-block:var(--section-gap)}
+.rule{border:0;border-top:1px solid var(--ink);margin:0}
+.ink .rule{border-top-color:var(--paper)}
+.shell{max-width:1440px;margin-inline:auto;width:100%}
+main{position:relative;z-index:2}
+section[id]{scroll-margin-top:96px}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{overflow:hidden;border-block:1px solid var(--ink);padding-block:5px;position:relative;z-index:3}
+.ticker__track{display:flex;width:max-content;animation:slide 44s linear infinite}
+.ticker__group{
+  display:flex;gap:var(--sp-32);padding-right:var(--sp-32);
+  font-size:var(--text-caption);letter-spacing:-0.12px;text-transform:uppercase;white-space:nowrap;
+}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.ticker--partners{border-block:0;padding-block:var(--sp-20)}
+.ticker--partners .ticker__track{animation-duration:60s}
+.ticker--partners .ticker__group{
+  align-items:center;gap:var(--sp-32);
+  font-family:var(--font-serif);font-size:var(--text-heading-sm);
+  text-transform:none;letter-spacing:-0.24px;
+}
+.tag-ghost{
+  display:inline-block;font-family:var(--font-ui);font-size:var(--text-caption);
+  font-weight:400;text-transform:uppercase;letter-spacing:-0.12px;
+  border:1px solid currentColor;border-radius:var(--radius);padding:4px 8px;line-height:1.2;
+}
+
+/* ============================================================
+   MASTHEAD / NAV
+   ============================================================ */
+.masthead{
+  position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid transparent;transition:border-color .2s ease;
+}
+.masthead.is-stuck{border-bottom-color:var(--ink)}
+.masthead__inner{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-24);
+  padding-block:var(--sp-16);
+}
+.wordmark{font-family:var(--font-serif);font-size:var(--text-subheading);line-height:1;letter-spacing:-0.2px;white-space:nowrap}
+.wordmark span{font-style:italic}
+.nav{display:flex;align-items:baseline;gap:var(--sp-24)}
+.nav a{font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px}
+.nav a[aria-current="true"]{font-size:var(--text-body)}
+.nav a:hover{font-style:italic}
+.nav-toggle{display:none;font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px}
+.drawer{display:none}
+
+@media (max-width:860px){
+  .nav,.masthead .btn{display:none}
+  .nav-toggle{display:block}
+  .drawer{
+    display:none;border-top:1px solid var(--ink);
+    padding:var(--sp-24) var(--gutter) var(--sp-32);
+  }
+  .drawer.is-open{display:block}
+  .drawer ul{display:flex;flex-direction:column;gap:var(--sp-16);margin-bottom:var(--sp-24)}
+  .drawer a{font-size:var(--text-subheading);font-weight:700;text-transform:uppercase;letter-spacing:-0.2px}
+}
+
+/* ============================================================
+   BUTTONS — emphasis by inversion and scale, never by fill colour
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-8);
+  font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px;
+  padding:var(--sp-12) var(--sp-20);border-radius:var(--radius);
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  transition:background .15s ease,color .15s ease;
+}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn--ghost{background:transparent;color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--paper)}
+.btn--lg{font-size:var(--text-body);padding:var(--sp-16) var(--sp-32)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.ink .btn{border-color:var(--paper);background:var(--paper);color:var(--ink)}
+.ink .btn:hover{background:transparent;color:var(--paper)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{padding-block:clamp(32px,6vw,64px) var(--section-gap)}
+.hero__grid{display:grid;grid-template-columns:1fr;gap:var(--sp-32);align-items:end}
+@media (min-width:900px){
+  .hero__grid{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:var(--sp-64)}
+}
+.hero__title{margin-block:var(--sp-24) var(--sp-32)}
+/* The signature move: an italic serif phrase set inline, at a fraction of the display size. */
+.display em{
+  font-style:italic;font-size:.34em;line-height:1;display:inline-block;
+  transform:translateY(-.28em);padding-inline:.15em;
+}
+.hero__facts{
+  display:flex;flex-wrap:wrap;gap:var(--sp-8) var(--sp-24);
+  border-top:1px solid var(--ink);padding-top:var(--sp-16);margin-bottom:var(--sp-32);
+}
+.hero__facts dt{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+.hero__facts dd{margin:0;font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px}
+.hero__actions{display:flex;flex-wrap:wrap;gap:var(--sp-12)}
+
+/* Halftone plate — square, monochrome, no caption. A typographic counterweight. */
+.plate{position:relative;aspect-ratio:1;background:var(--paper);border:1px solid var(--ink);overflow:hidden}
+.plate::before,.plate::after{content:'';position:absolute;inset:0}
+.plate::before{
+  background-image:radial-gradient(var(--ink) 44%,transparent 46%);
+  background-size:11px 11px;
+  -webkit-mask-image:radial-gradient(circle at 50% 42%,#000 0%,#000 26%,transparent 68%);
+  mask-image:radial-gradient(circle at 50% 42%,#000 0%,#000 26%,transparent 68%);
+}
+.plate::after{
+  background-image:radial-gradient(var(--ink) 40%,transparent 42%);
+  background-size:7px 7px;
+  -webkit-mask-image:radial-gradient(circle at 74% 82%,#000 0%,#000 8%,transparent 34%);
+  mask-image:radial-gradient(circle at 74% 82%,#000 0%,#000 8%,transparent 34%);
+}
+.plate__mark{
+  position:absolute;left:var(--sp-16);bottom:var(--sp-12);
+  font-family:var(--font-stamp);font-size:clamp(40px,7vw,64px);line-height:.75;text-transform:uppercase;
+}
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--paper);margin-top:var(--sp-24)}
+.countdown__cell{padding:var(--sp-24) var(--sp-16) var(--sp-16);border-left:1px solid var(--paper)}
+.countdown__cell:first-child{border-left:0;padding-left:0}
+.countdown__num{
+  display:block;font-family:var(--font-stamp);font-weight:400;
+  font-size:clamp(48px,11vw,132px);line-height:.75;font-variant-numeric:tabular-nums;
+}
+.countdown__label{display:block;margin-top:var(--sp-8);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.6}
+.countdown--live{display:block;padding-top:var(--sp-24);font-family:var(--font-serif);font-size:var(--text-heading-lg);line-height:.9}
+
+/* ============================================================
+   STAMPED SECTION MASTHEAD
+   ============================================================ */
+.stamp{padding-block:var(--sp-32) var(--sp-24);overflow:hidden}
+.stamp__row{display:flex;align-items:center;gap:var(--sp-24)}
+.stamp h2{
+  font-family:var(--font-stamp);font-weight:400;font-size:var(--text-display-xl);
+  line-height:.75;text-transform:uppercase;white-space:nowrap;
+}
+.stamp__rule{flex:1;height:1px;background:var(--paper);min-width:var(--sp-32)}
+
+/* ============================================================
+   SCHEDULE
+   ============================================================ */
+.controls{
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:var(--sp-24);margin-bottom:var(--sp-24);
+}
+.daytabs{display:flex;align-items:baseline;gap:var(--sp-24)}
+.daytab{
+  font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px;
+  color:var(--pebble);padding-bottom:var(--sp-4);border-bottom:1px solid transparent;
+}
+.daytab[aria-selected="true"]{font-size:var(--text-subheading);color:var(--ink);border-bottom-color:var(--ink)}
+
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-8)}
+.filters__label{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash);margin-right:var(--sp-4)}
+.chip{
+  font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;
+  border:1px solid var(--midstone);border-radius:var(--radius);padding:4px 8px;line-height:1.2;color:var(--sepia);
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.count{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash);padding-bottom:var(--sp-12);border-bottom:1px solid var(--ink)}
+
+.session{border-bottom:1px solid var(--hairline)}
+.session__head{
+  display:grid;grid-template-columns:1fr;gap:var(--sp-8);
+  width:100%;text-align:left;padding:var(--sp-20) 0;
+}
+@media (min-width:760px){
+  .session__head{grid-template-columns:150px minmax(0,1fr) 150px;align-items:start;gap:var(--sp-24)}
+}
+.session__time{font-size:var(--text-caption);letter-spacing:-0.12px;font-variant-numeric:tabular-nums;color:var(--sepia);padding-top:6px}
+.session__title{font-family:var(--font-serif);font-size:var(--text-heading-sm);line-height:1.2;letter-spacing:-0.24px;transition:font-style .1s ease}
+.session__head:hover .session__title{font-style:italic}
+.session__by{margin-top:var(--sp-4);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+.session__aside{display:flex;align-items:flex-start;justify-content:flex-start;gap:var(--sp-8)}
+@media (min-width:760px){.session__aside{justify-content:flex-end;padding-top:2px}}
+.session__sign{font-family:var(--font-serif);font-size:var(--text-subheading);line-height:1;width:1ch}
+.session__panel{overflow:hidden;height:0;transition:height .28s cubic-bezier(.2,.7,.3,1)}
+.session__body{padding:0 0 var(--sp-24)}
+@media (min-width:760px){.session__body{padding-left:174px;max-width:70ch}}
+.session__room{margin-top:var(--sp-12);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+
+/* Tracks are distinguished by border treatment, never by colour. */
+.track{
+  font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;
+  border-radius:var(--radius);padding:2px 8px;line-height:1.4;white-space:nowrap;color:var(--sepia);
+}
+.track--engineering{border:1px solid var(--ink)}
+.track--design{border:1px dashed var(--ink)}
+.track--career{border:1px dotted var(--ink)}
+.track--workshop{border:3px double var(--ink)}
+
+.empty{padding:var(--sp-64) 0;font-family:var(--font-serif);font-size:var(--text-heading-sm);color:var(--ash)}
+
+/* ============================================================
+   EDITORIAL LETTER
+   ============================================================ */
+.letter{padding-block:var(--section-gap);text-align:center}
+.letter__eyebrow{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;opacity:.6}
+.letter__body{
+  font-family:var(--font-serif);font-size:clamp(22px,3.2vw,32px);line-height:1.2;
+  max-width:24ch;margin:var(--sp-32) auto;
+}
+.letter__body em{font-style:italic}
+
+/* ============================================================
+   SPEAKERS
+   ============================================================ */
+.speakers{display:grid;grid-template-columns:1fr;gap:var(--sp-16)}
+@media (min-width:640px){.speakers{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1040px){.speakers{grid-template-columns:repeat(3,1fr)}}
+.speaker{
+  display:flex;flex-direction:column;align-items:flex-start;gap:var(--sp-12);
+  width:100%;text-align:left;border:1px solid var(--hairline);border-radius:var(--radius);
+  padding:var(--sp-16);background:var(--paper);
+  transition:border-color .15s ease;
+}
+.speaker:hover{border-color:var(--ink)}
+.speaker__plate{
+  position:relative;width:72px;height:72px;overflow:hidden;
+  background:var(--ink);color:var(--paper);flex:none;
+  display:flex;align-items:flex-end;justify-content:flex-start;
+}
+.speaker__plate::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(var(--paper) 42%,transparent 44%);
+  background-size:6px 6px;opacity:.5;
+  -webkit-mask-image:radial-gradient(circle at 70% 25%,#000 0%,transparent 62%);
+  mask-image:radial-gradient(circle at 70% 25%,#000 0%,transparent 62%);
+}
+.speaker__initials{position:relative;font-family:var(--font-stamp);font-size:40px;line-height:.75;padding:0 0 6px 6px}
+.speaker__name{font-family:var(--font-serif);font-size:var(--text-heading-sm);line-height:1.2;letter-spacing:-0.24px}
+.speaker:hover .speaker__name{font-style:italic}
+.speaker__role{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+.speaker__tags{display:flex;flex-wrap:wrap;gap:var(--sp-4);margin-top:auto;padding-top:var(--sp-4)}
+.speaker__tags span{
+  font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;
+  border:1px solid var(--midstone);border-radius:var(--radius);padding:2px 8px;line-height:1.4;color:var(--sepia);
+}
+
+/* ============================================================
+   FIGURES
+   ============================================================ */
+.figures{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--paper)}
+@media (min-width:900px){.figures{grid-template-columns:repeat(4,1fr)}}
+.figure{padding:var(--sp-24) var(--sp-16) var(--sp-32);border-left:1px solid var(--paper)}
+.figure:nth-child(odd){border-left:0;padding-left:0}
+@media (min-width:900px){
+  .figure:nth-child(odd){border-left:1px solid var(--paper);padding-left:var(--sp-16)}
+  .figure:first-child{border-left:0;padding-left:0}
+}
+.figure__num{font-family:var(--font-serif);font-size:clamp(56px,8vw,132px);line-height:.8;font-variant-numeric:tabular-nums;display:block}
+.figure__name{margin-top:var(--sp-12);font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px}
+.figure__note{margin-top:var(--sp-4);font-size:var(--text-caption);letter-spacing:-0.12px;opacity:.6;max-width:28ch}
+
+/* ============================================================
+   VENUE
+   ============================================================ */
+.venue{display:grid;grid-template-columns:1fr;gap:var(--sp-32)}
+@media (min-width:900px){.venue{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp-64)}}
+.venue__list{margin-top:var(--sp-32);border-top:1px solid var(--ink)}
+.venue__item{padding:var(--sp-16) 0;border-bottom:1px solid var(--hairline)}
+.venue__item h3{font-family:var(--font-serif);font-size:var(--text-subheading);line-height:1.3;letter-spacing:-0.2px}
+.venue__item p{margin-top:var(--sp-4);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+
+/* ============================================================
+   CLOSING BAND / FOOTER
+   ============================================================ */
+.closing{padding-block:var(--section-gap);text-align:center}
+.closing__title{max-width:16ch;margin-inline:auto}
+.closing .btn{margin-top:var(--sp-32)}
+.footer{padding-block:var(--sp-24)}
+.footer__line{
+  display:flex;flex-wrap:wrap;gap:var(--sp-8) var(--sp-16);
+  font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;
+}
+
+/* ============================================================
+   DIALOGS
+   ============================================================ */
+.scrim{
+  position:fixed;inset:0;z-index:60;display:flex;align-items:flex-start;justify-content:center;
+  padding:var(--gutter) var(--sp-16);overflow-y:auto;
+  background:rgba(42,39,34,.94);
+  opacity:0;transition:opacity .2s ease;
+}
+.scrim[hidden]{display:none}
+.scrim.is-open{opacity:1}
+.dialog{
+  position:relative;width:100%;max-width:640px;margin:auto;
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--ink);border-radius:var(--radius);
+  padding:var(--sp-32) clamp(20px,4vw,40px);
+  transform:translateY(12px);transition:transform .2s ease;
+}
+.scrim.is-open .dialog{transform:none}
+.dialog--speaker{max-width:520px}
+.dialog__close{
+  position:absolute;top:var(--sp-12);right:var(--sp-12);
+  width:32px;height:32px;border:1px solid var(--midstone);border-radius:var(--radius);
+  font-size:var(--text-body);line-height:1;display:flex;align-items:center;justify-content:center;
+}
+.dialog__close:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dialog__eyebrow{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+.dialog__title{margin-top:var(--sp-4);font-family:var(--font-serif);font-size:clamp(32px,5vw,44px);line-height:1;letter-spacing:-0.02em}
+.dialog__intro{margin-top:var(--sp-12);font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.form{margin-top:var(--sp-32)}
+.form__grid{display:grid;grid-template-columns:1fr;gap:var(--sp-20)}
+@media (min-width:560px){.form__grid--2{grid-template-columns:repeat(2,1fr)}}
+.field{margin-bottom:var(--sp-20)}
+.field__label{display:block;font-size:var(--text-caption);font-weight:700;text-transform:uppercase;letter-spacing:-0.12px;margin-bottom:var(--sp-8)}
+.field__opt{font-weight:400;color:var(--ash)}
+.field__hint{display:block;margin-top:var(--sp-4);font-size:var(--text-caption);letter-spacing:-0.12px;color:var(--ash)}
+.input,.select{
+  width:100%;background:var(--paper);color:var(--ink);
+  border:1px solid var(--midstone);border-radius:var(--radius);
+  padding:var(--sp-12) var(--sp-16);font-size:var(--text-body);
+}
+.input::placeholder{color:var(--pebble)}
+.input:focus-visible,.select:focus-visible{outline:2px solid var(--ink);outline-offset:-2px;border-color:var(--ink)}
+.select{
+  appearance:none;padding-right:40px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%232a2722' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+.field.is-invalid .input,.field.is-invalid .select{border-color:var(--ink);outline:2px solid var(--ink);outline-offset:-2px}
+.field__error{
+  display:none;margin-top:var(--sp-8);
+  font-family:var(--font-serif);font-style:italic;font-size:var(--text-caption);line-height:1.4;
+}
+.field.is-invalid .field__error{display:block}
+.field.is-invalid .choices{border-color:var(--ink)}
+
+.choices{display:flex;flex-wrap:wrap;gap:var(--sp-8)}
+.choice{
+  display:inline-flex;align-items:center;gap:var(--sp-8);cursor:pointer;
+  border:1px solid var(--midstone);border-radius:var(--radius);
+  padding:var(--sp-8) var(--sp-16);font-size:var(--text-caption);
+  text-transform:uppercase;letter-spacing:-0.12px;
+}
+.choice:hover{border-color:var(--ink)}
+.choice input{
+  appearance:none;width:14px;height:14px;margin:0;flex:none;
+  border:1px solid var(--ink);border-radius:3px;background:var(--paper);
+}
+.choice input:checked{background:var(--ink)}
+.choice input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.choice:has(input:checked){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.choice:has(input:checked) input{border-color:var(--paper);background:var(--paper)}
+
+.interests{display:flex;flex-wrap:wrap;gap:var(--sp-8)}
+.interest{
+  font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;
+  border:1px solid var(--midstone);border-radius:var(--radius);padding:var(--sp-8) var(--sp-16);color:var(--sepia);
+}
+.interest:hover{border-color:var(--ink);color:var(--ink)}
+.interest[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.consent{display:flex;align-items:flex-start;gap:var(--sp-12);cursor:pointer}
+.consent input{
+  appearance:none;width:16px;height:16px;margin:2px 0 0;flex:none;
+  border:1px solid var(--ink);border-radius:4px;background:var(--paper);
+}
+.consent input:checked{background:var(--ink)}
+.consent input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.consent span{font-size:var(--text-caption);line-height:1.5;letter-spacing:-0.12px;color:var(--sepia)}
+
+.form__summary{
+  display:none;margin-bottom:var(--sp-20);padding:var(--sp-12) var(--sp-16);
+  border:1px solid var(--ink);border-radius:var(--radius);
+  font-family:var(--font-serif);font-style:italic;font-size:var(--text-caption);line-height:1.5;
+}
+.form__summary.is-shown{display:block}
+.form__submit{width:100%;margin-top:var(--sp-8)}
+.spinner{
+  width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;
+  border-radius:50%;animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   SUCCESS / TICKET STUB
+   ============================================================ */
+.stub{margin-top:var(--sp-24);border:1px solid var(--ink);border-radius:var(--radius);overflow:hidden}
+.stub__top{background:var(--ink);color:var(--paper);padding:var(--sp-16)}
+.stub__code{font-family:var(--font-stamp);font-size:clamp(40px,9vw,64px);line-height:.8;text-transform:uppercase}
+.stub__rows{display:grid;grid-template-columns:1fr;border-top:1px dashed var(--ink)}
+@media (min-width:480px){.stub__rows{grid-template-columns:repeat(2,1fr)}}
+.stub__row{padding:var(--sp-12) var(--sp-16);border-bottom:1px solid var(--hairline)}
+.stub__row dt{font-size:var(--text-caption);text-transform:uppercase;letter-spacing:-0.12px;color:var(--ash)}
+.stub__row dd{margin:2px 0 0;font-family:var(--font-serif);font-size:var(--text-subheading);line-height:1.3}
+.success__actions{display:flex;flex-wrap:wrap;gap:var(--sp-12);margin-top:var(--sp-24)}
+.success__actions .btn{flex:1 1 200px}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.is-in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .ticker__track{animation:none;transform:none}
+  .reveal{opacity:1;transform:none}
+  .session__panel{transition:none}
+}
+
+@media print{
+  body::before,.ticker,.masthead,.scrim,.plate{display:none!important}
+  .ink{background:#fff!important;color:#000!important}
+  .session__panel{height:auto!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ TOP TICKER ============ -->
+<div class="ticker">
+  <div class="ticker__track">
+    <span class="ticker__group">
+      <span>DevSoc × SMIT present</span><span>Synthesis 2026</span><span>September 18–19</span>
+      <span>De La Salle-College of Saint Benilde</span><span>400 seats only</span><span>Registration open</span>
+    </span>
+    <span class="ticker__group" aria-hidden="true">
+      <span>DevSoc × SMIT present</span><span>Synthesis 2026</span><span>September 18–19</span>
+      <span>De La Salle-College of Saint Benilde</span><span>400 seats only</span><span>Registration open</span>
+    </span>
+  </div>
+</div>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="masthead" id="masthead">
+  <div class="band shell masthead__inner">
+    <a class="wordmark" href="#top">Synthesis <span>’26</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#programme">Programme</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#figures">Figures</a>
+      <a href="#venue">Venue</a>
+    </nav>
+    <button class="btn" data-open-register>Register now</button>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="drawer">Menu</button>
+  </div>
+  <div class="drawer" id="drawer">
+    <ul>
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#figures">Figures</a></li>
+      <li><a href="#venue">Venue</a></li>
+    </ul>
+    <button class="btn btn--lg" data-open-register style="width:100%">Register now</button>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- ============ HERO ============ -->
+  <section class="band shell hero">
+    <div class="hero__grid">
+      <div>
+        <p class="eyebrow">A two-day summit — Developer Society &amp; the School of Management and Information Technology</p>
+        <h1 class="display hero__title">Synthesis<br>2026 <em>where Benilde builds what’s next</em></h1>
+        <dl class="hero__facts">
+          <dt>Dates</dt><dd>18–19 September 2026</dd>
+          <dt>Venue</dt><dd>Taft Campus, Manila</dd>
+          <dt>Capacity</dt><dd>400 seats</dd>
+          <dt>Admission</dt><dd>Benilde students, free</dd>
+        </dl>
+        <div class="hero__actions">
+          <button class="btn btn--lg" data-open-register>Register now</button>
+          <a class="btn btn--lg btn--ghost" href="#programme">View the programme</a>
+        </div>
+      </div>
+      <div class="plate" role="img" aria-label="Halftone print plate in warm ink on cream paper.">
+        <span class="plate__mark">MMXXVI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COUNTDOWN (INK) ============ -->
+  <section class="ink band band--tall">
+    <div class="shell">
+      <p class="eyebrow" style="opacity:.6">The doors open in</p>
+      <div class="countdown" id="countdown" aria-live="off">
+        <div class="countdown__cell"><span class="countdown__num" id="cd-days">—</span><span class="countdown__label">Days</span></div>
+        <div class="countdown__cell"><span class="countdown__num" id="cd-hours">—</span><span class="countdown__label">Hours</span></div>
+        <div class="countdown__cell"><span class="countdown__num" id="cd-minutes">—</span><span class="countdown__label">Minutes</span></div>
+        <div class="countdown__cell"><span class="countdown__num" id="cd-seconds">—</span><span class="countdown__label">Seconds</span></div>
+      </div>
+      <p class="sr-only" id="cd-sr" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ============ PROGRAMME ============ -->
+  <section id="programme" class="ink stamp band">
+    <div class="shell stamp__row">
+      <h2>Programme</h2>
+      <span class="stamp__rule" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section class="band shell band--tall">
+    <div class="controls">
+      <div class="daytabs" role="tablist" aria-label="Summit days">
+        <button role="tab" class="daytab" id="tab-d1" aria-selected="true" aria-controls="panel-d1" tabindex="0">Day One — 18 Sept</button>
+        <button role="tab" class="daytab" id="tab-d2" aria-selected="false" aria-controls="panel-d2" tabindex="-1">Day Two — 19 Sept</button>
+      </div>
+      <div class="filters" id="filters">
+        <span class="filters__label" id="filters-label">Track</span>
+        <button class="chip" data-track="all" aria-pressed="true">All</button>
+        <button class="chip" data-track="Engineering" aria-pressed="false">Engineering</button>
+        <button class="chip" data-track="Design" aria-pressed="false">Design</button>
+        <button class="chip" data-track="Career" aria-pressed="false">Career</button>
+        <button class="chip" data-track="Workshop" aria-pressed="false">Workshop</button>
+      </div>
+    </div>
+
+    <p class="count" id="session-count" aria-live="polite"></p>
+
+    <div id="panel-d1" role="tabpanel" tabindex="0" aria-labelledby="tab-d1"></div>
+    <div id="panel-d2" role="tabpanel" tabindex="0" aria-labelledby="tab-d2" hidden></div>
+  </section>
+
+  <!-- ============ EDITORIAL LETTER (INK) ============ -->
+  <section class="ink band letter">
+    <div class="shell">
+      <p class="letter__eyebrow">A brief letter from the organisers</p>
+      <p class="letter__body">We built this the way we build everything — <em>late, together, and in public.</em> Two days, twelve rooms, four hundred seats. Bring the thing you have been afraid to ship.</p>
+      <p class="letter__eyebrow">DevSoc — De La Salle-College of Saint Benilde</p>
+    </div>
+  </section>
+
+  <!-- ============ SPEAKERS ============ -->
+  <section id="speakers" class="ink stamp band">
+    <div class="shell stamp__row">
+      <h2>Speakers</h2>
+      <span class="stamp__rule" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section class="band shell band--tall">
+    <div class="speakers" id="speakers-grid"></div>
+  </section>
+
+  <!-- ============ FIGURES (INK) ============ -->
+  <section id="figures" class="ink band band--tall">
+    <div class="shell">
+      <p class="eyebrow" style="opacity:.6">The summit in figures</p>
+      <h2 class="sr-only">Synthesis 2026 in figures</h2>
+      <div class="figures">
+        <div class="figure">
+          <span class="figure__num" data-count-to="12" data-suffix="+">0</span>
+          <span class="figure__name">Talks &amp; keynotes</span>
+          <span class="figure__note">Practitioners from studios and product teams across the region.</span>
+        </div>
+        <div class="figure">
+          <span class="figure__num" data-count-to="6">0</span>
+          <span class="figure__name">Hands-on workshops</span>
+          <span class="figure__note">Small rooms, real machines, no slides after the first ten minutes.</span>
+        </div>
+        <div class="figure">
+          <span class="figure__num" data-count-to="2">0</span>
+          <span class="figure__name">Days</span>
+          <span class="figure__note">Two full days, nine in the morning until five in the afternoon.</span>
+        </div>
+        <div class="figure">
+          <span class="figure__num" data-count-to="400">0</span>
+          <span class="figure__name">Seats</span>
+          <span class="figure__note">Capped so every workshop stays small enough to be useful.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VENUE ============ -->
+  <section id="venue" class="band shell band--tall">
+    <div class="venue">
+      <div class="reveal">
+        <p class="eyebrow">Where</p>
+        <h2 class="heading-lg" style="margin-top:var(--sp-16)">De La Salle-College of Saint Benilde</h2>
+        <p class="prose" style="margin-top:var(--sp-24);max-width:52ch">
+          Synthesis runs across the Taft and Design + Arts campuses along Taft Avenue in Malate, Manila.
+          Keynotes are staged in the theatre; workshops run in the SMIT laboratories, capped at thirty
+          seats each so nobody watches from the back of a room.
+        </p>
+        <div class="venue__list">
+          <div class="venue__item">
+            <h3>Theatre — keynotes &amp; panels</h3>
+            <p>5th Floor Theatre, Design + Arts Campus, Taft Avenue, Malate</p>
+          </div>
+          <div class="venue__item">
+            <h3>Laboratories — workshops</h3>
+            <p>SMIT Laboratories &amp; Innovation Hub, Atrium Campus</p>
+          </div>
+          <div class="venue__item">
+            <h3>Courtyard — lunch &amp; the student showcase</h3>
+            <p>Atrium Courtyard, both days, 11:45 onwards</p>
+          </div>
+        </div>
+      </div>
+      <div class="plate reveal" role="img" aria-label="Second halftone print plate.">
+        <span class="plate__mark">Taft<br>Ave.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING (INK) ============ -->
+  <section class="ink band closing">
+    <div class="shell">
+      <p class="eyebrow" style="opacity:.6">Four hundred seats</p>
+      <h2 class="display closing__title" style="margin-top:var(--sp-24)">Take one <em>before they go</em></h2>
+      <button class="btn btn--lg" data-open-register>Register now</button>
+    </div>
+  </section>
+
+  <!-- ============ PARTNER TICKER (INK) ============ -->
+  <div class="ink ticker ticker--partners">
+    <div class="ticker__track">
+      <span class="ticker__group">
+        <span>Student Showcase</span><span class="tag-ghost">Coming soon</span><span>Workshop Track</span>
+        <span>Alumni Panel</span><span class="tag-ghost">Coming soon</span><span>Career Desk</span><span>Closing Raffle</span>
+      </span>
+      <span class="ticker__group" aria-hidden="true">
+        <span>Student Showcase</span><span class="tag-ghost">Coming soon</span><span>Workshop Track</span>
+        <span>Alumni Panel</span><span class="tag-ghost">Coming soon</span><span>Career Desk</span><span>Closing Raffle</span>
+      </span>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<hr class="rule">
+<footer class="band shell footer">
+  <div class="footer__line">
+    <span>14°33′53″ N 120°59′40″ E (Manila, Philippines)</span>
+    <span>—</span>
+    <span>Synthesis MMXXVI</span>
+    <span>—</span>
+    <span>DevSoc × SMIT</span>
+    <span>—</span>
+    <span>Set in Fraunces, Antonio &amp; Inter</span>
+  </div>
+</footer>
+
+<!-- ============ SPEAKER DIALOG ============ -->
+<div class="scrim" id="speaker-scrim" hidden>
+  <div class="dialog dialog--speaker" role="dialog" aria-modal="true" aria-labelledby="speaker-name">
+    <button class="dialog__close" data-close-dialog aria-label="Close">✕</button>
+    <p class="dialog__eyebrow" id="speaker-role"></p>
+    <h2 class="dialog__title" id="speaker-name"></h2>
+    <p class="prose" id="speaker-bio" style="margin-top:var(--sp-20)"></p>
+    <hr class="rule" style="margin-block:var(--sp-24);border-top-color:var(--hairline)">
+    <p class="eyebrow" style="color:var(--ash)">Speaking at</p>
+    <p class="serif" id="speaker-session" style="font-size:var(--text-subheading);line-height:1.3;margin-top:var(--sp-8)"></p>
+    <button class="btn btn--ghost" id="speaker-jump" style="margin-top:var(--sp-16)">Find it in the programme</button>
+  </div>
+</div>
+
+<!-- ============ REGISTRATION DIALOG ============ -->
+<div class="scrim" id="register-scrim" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="register-title">
+    <button class="dialog__close" data-close-dialog aria-label="Close registration">✕</button>
+
+    <!-- FORM VIEW -->
+    <div id="register-form-view">
+      <p class="dialog__eyebrow">Registration</p>
+      <h2 class="dialog__title" id="register-title">Claim a seat</h2>
+      <p class="dialog__intro">Four hundred available — one per student number</p>
+
+      <form class="form" id="register-form" novalidate>
+        <p class="form__summary" id="form-summary" tabindex="-1" role="alert"></p>
+
+        <div class="field">
+          <label class="field__label" for="f-name">Full name</label>
+          <input class="input" type="text" id="f-name" name="name" autocomplete="name" placeholder="Juan dela Cruz" aria-describedby="e-name">
+          <p class="field__error" id="e-name"></p>
+        </div>
+
+        <div class="form__grid form__grid--2">
+          <div class="field">
+            <label class="field__label" for="f-id">Student number</label>
+            <input class="input" type="text" id="f-id" name="studentId" inputmode="numeric" placeholder="123456789" aria-describedby="h-id e-id">
+            <span class="field__hint" id="h-id">Nine digits</span>
+            <p class="field__error" id="e-id"></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-email">Benilde email</label>
+            <input class="input" type="email" id="f-email" name="email" autocomplete="email" placeholder="name@benilde.edu.ph" aria-describedby="e-email">
+            <p class="field__error" id="e-email"></p>
+          </div>
+        </div>
+
+        <div class="form__grid form__grid--2">
+          <div class="field">
+            <label class="field__label" for="f-course">Course</label>
+            <select class="select" id="f-course" name="course" aria-describedby="e-course">
+              <option value="">Select a programme</option>
+              <option>BS Information Systems</option>
+              <option>BS Computer Applications</option>
+              <option>BS Computer Science</option>
+              <option>BS Digital Filmmaking</option>
+              <option>BS Multimedia Arts</option>
+              <option>BS Interior Design</option>
+              <option>BS Business Management</option>
+              <option>Other</option>
+            </select>
+            <p class="field__error" id="e-course"></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-year">Year level</label>
+            <select class="select" id="f-year" name="year" aria-describedby="e-year">
+              <option value="">Select a year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+              <option>5th Year</option>
+            </select>
+            <p class="field__error" id="e-year"></p>
+          </div>
+        </div>
+
+        <fieldset class="field" id="field-days" style="border:0;padding:0;margin-inline:0">
+          <legend class="field__label" style="padding:0">Days attending</legend>
+          <div class="choices" role="group" aria-describedby="e-days">
+            <label class="choice"><input type="checkbox" name="days" value="Day One — 18 September"> Day One — 18 Sept</label>
+            <label class="choice"><input type="checkbox" name="days" value="Day Two — 19 September"> Day Two — 19 Sept</label>
+          </div>
+          <p class="field__error" id="e-days"></p>
+        </fieldset>
+
+        <div class="field">
+          <span class="field__label" id="interests-label">Tracks you are interested in <span class="field__opt">(optional)</span></span>
+          <div class="interests" id="interests" role="group" aria-labelledby="interests-label">
+            <button type="button" class="interest" data-value="Engineering" aria-pressed="false">Engineering</button>
+            <button type="button" class="interest" data-value="Design &amp; UX" aria-pressed="false">Design &amp; UX</button>
+            <button type="button" class="interest" data-value="Artificial Intelligence" aria-pressed="false">Artificial Intelligence</button>
+            <button type="button" class="interest" data-value="Career &amp; Leadership" aria-pressed="false">Career &amp; Leadership</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-diet">Dietary restrictions <span class="field__opt">(optional)</span></label>
+          <input class="input" type="text" id="f-diet" name="dietary" placeholder="Vegetarian, halal, allergies…">
+        </div>
+
+        <div class="field" id="field-consent">
+          <label class="consent">
+            <input type="checkbox" id="f-consent" name="consent" aria-describedby="e-consent">
+            <span>I agree to DevSoc contacting me about Synthesis 2026, and to the event’s code of conduct and photo coverage.</span>
+          </label>
+          <p class="field__error" id="e-consent"></p>
+        </div>
+
+        <button class="btn btn--lg form__submit" type="submit" id="submit-btn">
+          <span id="submit-label">Complete registration</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- SUCCESS VIEW -->
+    <div id="register-success-view" hidden>
+      <p class="dialog__eyebrow">Confirmed</p>
+      <h2 class="dialog__title" id="success-title">You have a seat</h2>
+      <p class="dialog__intro">Saved to this browser — bring the code to the registration desk</p>
+
+      <div class="stub">
+        <div class="stub__top">
+          <p class="eyebrow" style="opacity:.6">Confirmation</p>
+          <p class="stub__code" id="s-code"></p>
+        </div>
+        <dl class="stub__rows">
+          <div class="stub__row"><dt>Attendee</dt><dd id="s-name"></dd></div>
+          <div class="stub__row"><dt>Student number</dt><dd id="s-id"></dd></div>
+          <div class="stub__row"><dt>Course</dt><dd id="s-course"></dd></div>
+          <div class="stub__row"><dt>Attending</dt><dd id="s-days"></dd></div>
+        </dl>
+      </div>
+
+      <div class="success__actions">
+        <button class="btn btn--lg" id="ics-btn">Add to calendar</button>
+        <button class="btn btn--lg btn--ghost" id="reset-btn">Register someone else</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ==========================================================
+     DATA
+     ========================================================== */
+  var SESSIONS = [
+    { id:'d1-1', day:1, time:'09:00 — 09:15', title:'Opening ceremony', by:'DevSoc officers & the SMIT dean', room:'Theatre', track:'Career',
+      detail:'A short welcome from the organising committee and the school, plus the housekeeping nobody reads in the programme booklet.' },
+    { id:'d1-2', day:1, time:'09:15 — 10:15', title:'Practical AI architectures for 2026', by:'Marco Reyes', room:'Theatre', track:'Engineering',
+      detail:'What actually ships: retrieval that holds up in production, evaluation you can trust, and the unglamorous plumbing between a model and a product.' },
+    { id:'d1-3', day:1, time:'10:30 — 11:45', title:'Design systems that survive contact', by:'Janelle Santos', room:'Theatre', track:'Design',
+      detail:'Harmonising a multi-platform design language without turning every component into a configuration problem.' },
+    { id:'d1-4', day:1, time:'11:45 — 13:00', title:'Lunch & the tech expo', by:'DevSoc and partners', room:'Courtyard', track:'Career',
+      detail:'Lunch is provided. Student projects are on tables around the courtyard, and the partner teams are there to be bothered.' },
+    { id:'d1-5', day:1, time:'13:00 — 14:00', title:'Designing for the next hundred million', by:'Bea Tan-Castillo', room:'Hall A', track:'Design',
+      detail:'Accessibility, low-bandwidth performance and local interface conventions, drawn from products used daily across the country.' },
+    { id:'d1-6', day:1, time:'14:15 — 15:30', title:'Performance benchmarking, hands on', by:'DevSoc core team', room:'Laboratory 302', track:'Workshop',
+      detail:'Bring a laptop. We profile a real application together: web vitals, bundle weight, and the database index that was the problem all along.' },
+    { id:'d1-7', day:1, time:'15:45 — 17:00', title:'Fireside — day one', by:'All day one speakers', room:'Theatre', track:'Career',
+      detail:'Open questions on portfolios, internships and the first two years of a career. Unmoderated after the first twenty minutes.' },
+
+    { id:'d2-1', day:2, time:'09:00 — 09:30', title:'The state of Philippine tech talent', by:'DevSoc faculty adviser', room:'Theatre', track:'Career',
+      detail:'Where the regional market is going, what remote work has actually changed, and which competencies are being hired for right now.' },
+    { id:'d2-2', day:2, time:'09:30 — 10:45', title:'High-throughput services in fintech', by:'Devon Mendoza', room:'Theatre', track:'Engineering',
+      detail:'Fault tolerance for financial transactions, event streaming, idempotency, and what to do when the third-party API is down again.' },
+    { id:'d2-3', day:2, time:'11:00 — 12:15', title:'Web security and zero trust', by:'Guest security researcher', room:'Hall B', track:'Engineering',
+      detail:'The vulnerabilities that keep appearing in student and startup code, OAuth edge cases, and why client-side storage is not a vault.' },
+    { id:'d2-4', day:2, time:'12:15 — 13:00', title:'Lunch & lightning demos', by:'Benilde student creators', room:'Courtyard', track:'Career',
+      detail:'Three minutes each, no slide limit, hard cut-off. Capstones, side projects, and one thing somebody built the night before.' },
+    { id:'d2-5', day:2, time:'13:00 — 15:15', title:'Creative coding with WebGL & shaders', by:'Aria Lumagbas', room:'Laboratory 304', track:'Workshop',
+      detail:'Build interactive visual work directly in the browser canvas. No prior graphics experience assumed; some patience required.' },
+    { id:'d2-6', day:2, time:'15:30 — 16:30', title:'From the classroom to a company', by:'Paolo Dizon & alumni panel', room:'Theatre', track:'Career',
+      detail:'Benilde alumni on turning a thesis into a product, the parts of the founder story that get left out, and when not to do it.' },
+    { id:'d2-7', day:2, time:'16:30 — 17:00', title:'Closing ceremony & raffle', by:'DevSoc executive board', room:'Theatre', track:'Career',
+      detail:'Closing remarks, certificates, and the giveaway you are all actually staying for.' }
+  ];
+
+  var SPEAKERS = [
+    { id:'s1', initials:'JS', name:'Janelle Santos', role:'Staff frontend architect', org:'Canva', tags:['Engineering','Design systems'], session:'d1-3',
+      bio:'Janelle leads web performance and design infrastructure work in Manila, and has spent a decade keeping large frontend systems from collapsing under their own component libraries.' },
+    { id:'s2', initials:'MR', name:'Marco Reyes', role:'Head of AI research', org:'Thinking Machines', tags:['Artificial intelligence','Engineering'], session:'d1-2',
+      bio:'Marco works on machine learning for public-sector and enterprise data platforms, with a particular interest in models small enough to run where the data already is.' },
+    { id:'s3', initials:'BT', name:'Bea Tan-Castillo', role:'Lead UX strategist', org:'GCash', tags:['Design','Research'], session:'d1-5',
+      bio:'Bea designs for financial inclusion — interfaces used every day by tens of millions of Filipinos, most of them on mid-range phones and inconsistent connections.' },
+    { id:'s4', initials:'DM', name:'Devon Mendoza', role:'VP of engineering', org:'PayMongo', tags:['Engineering','Career'], session:'d2-2',
+      bio:'Devon runs cloud infrastructure and developer platform reliability, and mentors early-career Filipino engineers through their first production incident.' },
+    { id:'s5', initials:'AL', name:'Aria Lumagbas', role:'Principal creative technologist', org:'Globe Telecom', tags:['Workshop','Design'], session:'d2-5',
+      bio:'Aria works where generative graphics, WebGL and physical computing overlap, building interactive installations that are equal parts code and carpentry.' },
+    { id:'s6', initials:'PD', name:'Paolo Dizon', role:'Founder & technical lead', org:'Benilde alumnus', tags:['Career','Startups'], session:'d2-6',
+      bio:'Paolo graduated from BS Information Systems at Benilde and bootstrapped a developer tooling company that now serves teams in a dozen countries.' }
+  ];
+
+  var STORAGE_KEY = 'synthesis2026.registration';
+  var EVENT_START = new Date('2026-09-18T09:00:00+08:00');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function esc(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  /* ==========================================================
+     DIALOG — focus trap, scroll lock, inert background
+     ========================================================== */
+  var Dialog = (function () {
+    var openDialog = null;
+    var lastFocused = null;
+    var scrollY = 0;
+    var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+    function focusable(scrim) {
+      return $$(FOCUSABLE, scrim).filter(function (el) {
+        return el.offsetParent !== null || el.getClientRects().length > 0;
+      });
+    }
+
+    function onKeydown(e) {
+      if (!openDialog) return;
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+
+      var items = focusable(openDialog);
+      if (!items.length) { e.preventDefault(); return; }
+      var first = items[0];
+      var last = items[items.length - 1];
+      var active = document.activeElement;
+
+      if (!openDialog.contains(active)) { e.preventDefault(); first.focus(); return; }
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function open(scrim, initialFocus) {
+      if (openDialog) close();
+      lastFocused = document.activeElement;
+      scrollY = window.scrollY;
+
+      scrim.hidden = false;
+      // Force a frame so the opacity transition runs from 0.
+      void scrim.offsetWidth;
+      scrim.classList.add('is-open');
+
+      document.body.style.top = '-' + scrollY + 'px';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.classList.add('is-locked');
+
+      $$('body > *:not(.scrim)').forEach(function (el) {
+        el.setAttribute('aria-hidden', 'true');
+        if ('inert' in HTMLElement.prototype) el.inert = true;
+      });
+
+      openDialog = scrim;
+      document.addEventListener('keydown', onKeydown, true);
+
+      var target = initialFocus || focusable(scrim)[0];
+      if (target) target.focus({ preventScroll: true });
+    }
+
+    function close() {
+      if (!openDialog) return;
+      var scrim = openDialog;
+      openDialog = null;
+      document.removeEventListener('keydown', onKeydown, true);
+
+      scrim.classList.remove('is-open');
+      var finish = function () { scrim.hidden = true; };
+      if (reduceMotion.matches) finish();
+      else window.setTimeout(finish, 200);
+
+      $$('body > *:not(.scrim)').forEach(function (el) {
+        el.removeAttribute('aria-hidden');
+        if ('inert' in HTMLElement.prototype) el.inert = false;
+      });
+
+      document.body.classList.remove('is-locked');
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollY);
+
+      if (lastFocused && document.contains(lastFocused)) lastFocused.focus({ preventScroll: true });
+      lastFocused = null;
+    }
+
+    $$('.scrim').forEach(function (scrim) {
+      scrim.addEventListener('mousedown', function (e) { if (e.target === scrim) close(); });
+    });
+    $$('[data-close-dialog]').forEach(function (btn) {
+      btn.addEventListener('click', close);
+    });
+
+    return { open: open, close: close, isOpen: function () { return !!openDialog; } };
+  })();
+
+  /* ==========================================================
+     MASTHEAD & DRAWER
+     ========================================================== */
+  (function () {
+    var masthead = $('#masthead');
+    var toggle = $('#nav-toggle');
+    var drawer = $('#drawer');
+
+    var sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px';
+    document.body.prepend(sentinel);
+    new IntersectionObserver(function (entries) {
+      masthead.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }).observe(sentinel);
+
+    function setDrawer(open) {
+      drawer.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Close' : 'Menu';
+    }
+    toggle.addEventListener('click', function () {
+      setDrawer(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    $$('#drawer a').forEach(function (a) {
+      a.addEventListener('click', function () { setDrawer(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true' && !Dialog.isOpen()) {
+        setDrawer(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (toggle.getAttribute('aria-expanded') !== 'true') return;
+      if (!masthead.contains(e.target)) setDrawer(false);
+    });
+
+    // Mark the section currently in view.
+    var links = $$('.nav a');
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var link = byId[entry.target.id];
+        if (link) link.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) spy.observe(el);
+    });
+  })();
+
+  /* ==========================================================
+     COUNTDOWN
+     ========================================================== */
+  (function () {
+    var cells = {
+      days: $('#cd-days'), hours: $('#cd-hours'),
+      minutes: $('#cd-minutes'), seconds: $('#cd-seconds')
+    };
+    var wrap = $('#countdown');
+    var sr = $('#cd-sr');
+    var timer = null;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      var diff = EVENT_START.getTime() - Date.now();
+
+      if (diff <= 0) {
+        if (timer) { window.clearInterval(timer); timer = null; }
+        wrap.className = 'countdown--live';
+        wrap.textContent = 'The summit is open.';
+        if (sr) sr.textContent = 'The summit is open.';
+        return;
+      }
+
+      var s = Math.floor(diff / 1000);
+      cells.days.textContent = pad(Math.floor(s / 86400));
+      cells.hours.textContent = pad(Math.floor(s % 86400 / 3600));
+      cells.minutes.textContent = pad(Math.floor(s % 3600 / 60));
+      cells.seconds.textContent = pad(s % 60);
+    }
+
+    tick();
+    if (EVENT_START.getTime() > Date.now()) {
+      timer = window.setInterval(tick, 1000);
+      var days = Math.floor((EVENT_START.getTime() - Date.now()) / 86400000);
+      if (sr) sr.textContent = days + ' days until Synthesis 2026 opens.';
+    }
+  })();
+
+  /* ==========================================================
+     PROGRAMME — tabs, filter, accordion
+     ========================================================== */
+  var Programme = (function () {
+    var tabs = [$('#tab-d1'), $('#tab-d2')];
+    var panels = [$('#panel-d1'), $('#panel-d2')];
+    var countEl = $('#session-count');
+    var chips = $$('#filters .chip');
+    var currentDay = 1;
+    var currentTrack = 'all';
+
+    function trackClass(track) { return 'track track--' + track.toLowerCase(); }
+
+    function render() {
+      panels.forEach(function (panel, i) {
+        var day = i + 1;
+        var list = SESSIONS.filter(function (s) {
+          return s.day === day && (currentTrack === 'all' || s.track === currentTrack);
+        });
+
+        if (!list.length) {
+          panel.innerHTML = '<p class="empty">Nothing on this day in the ' + esc(currentTrack) + ' track.</p>';
+          return;
+        }
+
+        panel.innerHTML = list.map(function (s) {
+          return '' +
+            '<article class="session" id="session-' + s.id + '">' +
+              '<h3 style="margin:0">' +
+                '<button class="session__head" type="button" aria-expanded="false" aria-controls="panel-' + s.id + '" id="btn-' + s.id + '">' +
+                  '<span class="session__time">' + esc(s.time) + '</span>' +
+                  '<span>' +
+                    '<span class="session__title">' + esc(s.title) + '</span>' +
+                    '<span class="session__by">' + esc(s.by) + '</span>' +
+                  '</span>' +
+                  '<span class="session__aside">' +
+                    '<span class="' + trackClass(s.track) + '">' + esc(s.track) + '</span>' +
+                    '<span class="session__sign" aria-hidden="true">+</span>' +
+                  '</span>' +
+                '</button>' +
+              '</h3>' +
+              '<div class="session__panel" id="panel-' + s.id + '" role="region" aria-labelledby="btn-' + s.id + '">' +
+                '<div class="session__body">' +
+                  '<p class="prose">' + esc(s.detail) + '</p>' +
+                  '<p class="session__room">' + esc(s.room) + '</p>' +
+                '</div>' +
+              '</div>' +
+            '</article>';
+        }).join('');
+      });
+
+      updateCount();
+    }
+
+    function updateCount() {
+      var n = SESSIONS.filter(function (s) {
+        return s.day === currentDay && (currentTrack === 'all' || s.track === currentTrack);
+      }).length;
+      countEl.textContent = n + (n === 1 ? ' session' : ' sessions') +
+        ' — Day ' + (currentDay === 1 ? 'One' : 'Two') +
+        (currentTrack === 'all' ? ', all tracks' : ', ' + currentTrack.toLowerCase());
+    }
+
+    function selectDay(day, moveFocus) {
+      currentDay = day;
+      tabs.forEach(function (tab, i) {
+        var on = (i + 1) === day;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        panels[i].hidden = !on;
+        if (on && moveFocus) tab.focus();
+      });
+      updateCount();
+    }
+
+    function toggleSession(btn) {
+      var region = document.getElementById(btn.getAttribute('aria-controls'));
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      var sign = $('.session__sign', btn);
+
+      // Only one session open at a time, per panel.
+      var panel = btn.closest('[role="tabpanel"]');
+      $$('.session__head[aria-expanded="true"]', panel).forEach(function (other) {
+        if (other === btn) return;
+        other.setAttribute('aria-expanded', 'false');
+        $('.session__sign', other).textContent = '+';
+        var r = document.getElementById(other.getAttribute('aria-controls'));
+        r.style.height = r.scrollHeight + 'px';
+        void r.offsetHeight;
+        r.style.height = '0px';
+      });
+
+      if (isOpen) {
+        btn.setAttribute('aria-expanded', 'false');
+        sign.textContent = '+';
+        region.style.height = region.scrollHeight + 'px';
+        void region.offsetHeight;
+        region.style.height = '0px';
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        sign.textContent = '−';
+        region.style.height = region.scrollHeight + 'px';
+        // Release the fixed height once open so reflow (resize, font swap) is handled.
+        window.setTimeout(function () {
+          if (btn.getAttribute('aria-expanded') === 'true') region.style.height = 'auto';
+        }, reduceMotion.matches ? 0 : 300);
+      }
+    }
+
+    // Tabs
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { selectDay(i + 1, false); });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        selectDay(next + 1, true);
+      });
+    });
+
+    // Filter chips
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var track = chip.dataset.track;
+        // Clicking the active chip clears back to All.
+        currentTrack = (currentTrack === track && track !== 'all') ? 'all' : track;
+        chips.forEach(function (c) {
+          c.setAttribute('aria-pressed', String(c.dataset.track === currentTrack));
+        });
+        render();
+      });
+    });
+
+    // Accordion (delegated — survives re-render)
+    panels.forEach(function (panel) {
+      panel.addEventListener('click', function (e) {
+        var btn = e.target.closest('.session__head');
+        if (btn) toggleSession(btn);
+      });
+    });
+
+    // Keep an open panel correctly sized when the viewport changes.
+    window.addEventListener('resize', function () {
+      $$('.session__head[aria-expanded="true"]').forEach(function (btn) {
+        document.getElementById(btn.getAttribute('aria-controls')).style.height = 'auto';
+      });
+    });
+
+    render();
+
+    return {
+      reveal: function (sessionId) {
+        var session = SESSIONS.filter(function (s) { return s.id === sessionId; })[0];
+        if (!session) return;
+        currentTrack = 'all';
+        chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.track === 'all')); });
+        render();
+        selectDay(session.day, false);
+        var btn = document.getElementById('btn-' + sessionId);
+        if (!btn) return;
+        if (btn.getAttribute('aria-expanded') !== 'true') toggleSession(btn);
+        btn.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' });
+        btn.focus({ preventScroll: true });
+      },
+      titleOf: function (sessionId) {
+        var s = SESSIONS.filter(function (x) { return x.id === sessionId; })[0];
+        return s ? s.title + ' — Day ' + (s.day === 1 ? 'One' : 'Two') + ', ' + s.time : '';
+      }
+    };
+  })();
+
+  /* ==========================================================
+     SPEAKERS
+     ========================================================== */
+  (function () {
+    var grid = $('#speakers-grid');
+    var scrim = $('#speaker-scrim');
+    var jump = $('#speaker-jump');
+    var activeSession = null;
+
+    grid.innerHTML = SPEAKERS.map(function (sp) {
+      return '' +
+        '<button class="speaker reveal" type="button" data-speaker="' + sp.id + '">' +
+          '<span class="speaker__plate"><span class="speaker__initials">' + esc(sp.initials) + '</span></span>' +
+          '<span class="speaker__name">' + esc(sp.name) + '</span>' +
+          '<span class="speaker__role">' + esc(sp.role) + ' — ' + esc(sp.org) + '</span>' +
+          '<span class="speaker__tags">' + sp.tags.map(function (t) {
+            return '<span>' + esc(t) + '</span>';
+          }).join('') + '</span>' +
+        '</button>';
+    }).join('');
+
+    grid.addEventListener('click', function (e) {
+      var card = e.target.closest('[data-speaker]');
+      if (!card) return;
+      var sp = SPEAKERS.filter(function (x) { return x.id === card.dataset.speaker; })[0];
+      if (!sp) return;
+
+      $('#speaker-name').textContent = sp.name;
+      $('#speaker-role').textContent = sp.role + ' — ' + sp.org;
+      $('#speaker-bio').textContent = sp.bio;
+      $('#speaker-session').textContent = Programme.titleOf(sp.session);
+      activeSession = sp.session;
+      Dialog.open(scrim);
+    });
+
+    jump.addEventListener('click', function () {
+      var target = activeSession;
+      Dialog.close();
+      window.setTimeout(function () { Programme.reveal(target); }, reduceMotion.matches ? 0 : 220);
+    });
+  })();
+
+  /* ==========================================================
+     REVEAL & FIGURES
+     ========================================================== */
+  (function () {
+    var revealables = $$('.reveal');
+    if (reduceMotion.matches) {
+      revealables.forEach(function (el) { el.classList.add('is-in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      revealables.forEach(function (el) { io.observe(el); });
+    }
+
+    var figures = $$('[data-count-to]');
+    function paint(el, value) {
+      el.textContent = String(value) + (el.dataset.suffix || '');
+    }
+    if (reduceMotion.matches) {
+      figures.forEach(function (el) { paint(el, Number(el.dataset.countTo)); });
+    } else {
+      var counterIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          counterIO.unobserve(el);
+          var to = Number(el.dataset.countTo);
+          var started = null;
+          var duration = 1100;
+          (function step(now) {
+            if (started === null) started = now;
+            var p = Math.min((now - started) / duration, 1);
+            paint(el, Math.round(to * (1 - Math.pow(1 - p, 3))));
+            if (p < 1) window.requestAnimationFrame(step);
+          })(performance.now());
+        });
+      }, { threshold: 0.4 });
+      figures.forEach(function (el) { counterIO.observe(el); });
+    }
+  })();
+
+  /* ==========================================================
+     CALENDAR FILE (RFC 5545)
+     ========================================================== */
+  function buildICS(reg) {
+    function stamp(date) {
+      return date.getUTCFullYear() +
+        String(date.getUTCMonth() + 1).padStart(2, '0') +
+        String(date.getUTCDate()).padStart(2, '0') + 'T' +
+        String(date.getUTCHours()).padStart(2, '0') +
+        String(date.getUTCMinutes()).padStart(2, '0') +
+        String(date.getUTCSeconds()).padStart(2, '0') + 'Z';
+    }
+    function escText(value) {
+      return String(value)
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/\r?\n/g, '\\n');
+    }
+    // RFC 5545 §3.1 — fold lines longer than 75 octets.
+    function fold(line) {
+      if (line.length <= 75) return line;
+      var out = [line.slice(0, 75)];
+      var rest = line.slice(75);
+      while (rest.length > 74) { out.push(' ' + rest.slice(0, 74)); rest = rest.slice(74); }
+      out.push(' ' + rest);
+      return out.join('\r\n');
+    }
+
+    var now = stamp(new Date());
+    var days = [
+      { n: 1, start: '2026-09-18T09:00:00+08:00', end: '2026-09-18T17:00:00+08:00' },
+      { n: 2, start: '2026-09-19T09:00:00+08:00', end: '2026-09-19T17:00:00+08:00' }
+    ].filter(function (d) {
+      return reg.days.some(function (label) { return label.indexOf(d.n === 1 ? 'Day One' : 'Day Two') === 0; });
+    });
+
+    var lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//DevSoc Benilde//Synthesis 2026//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH'
+    ];
+
+    days.forEach(function (d) {
+      lines.push(
+        'BEGIN:VEVENT',
+        'UID:' + reg.code.toLowerCase() + '-day' + d.n + '@synthesis.devsoc.benilde',
+        'DTSTAMP:' + now,
+        'DTSTART:' + stamp(new Date(d.start)),
+        'DTEND:' + stamp(new Date(d.end)),
+        'SUMMARY:' + escText('Synthesis 2026 — Day ' + (d.n === 1 ? 'One' : 'Two')),
+        'DESCRIPTION:' + escText(
+          'DevSoc x SMIT Tech Summit.\nConfirmation code: ' + reg.code +
+          '\nAttendee: ' + reg.name + ' (' + reg.studentId + ')' +
+          '\nBring your student ID to the registration desk.'
+        ),
+        'LOCATION:' + escText('De La Salle-College of Saint Benilde, Taft Avenue, Malate, Manila'),
+        'STATUS:CONFIRMED',
+        'END:VEVENT'
+      );
+    });
+
+    lines.push('END:VCALENDAR');
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+
+  /* ==========================================================
+     REGISTRATION
+     ========================================================== */
+  (function () {
+    var scrim = $('#register-scrim');
+    var form = $('#register-form');
+    var formView = $('#register-form-view');
+    var successView = $('#register-success-view');
+    var summary = $('#form-summary');
+    var submitBtn = $('#submit-btn');
+    var submitLabel = $('#submit-label');
+    var openers = $$('[data-open-register]');
+
+    var fields = {
+      name:    { input: $('#f-name'),    error: $('#e-name'),    wrap: $('#f-name').closest('.field') },
+      id:      { input: $('#f-id'),      error: $('#e-id'),      wrap: $('#f-id').closest('.field') },
+      email:   { input: $('#f-email'),   error: $('#e-email'),   wrap: $('#f-email').closest('.field') },
+      course:  { input: $('#f-course'),  error: $('#e-course'),  wrap: $('#f-course').closest('.field') },
+      year:    { input: $('#f-year'),    error: $('#e-year'),    wrap: $('#f-year').closest('.field') },
+      days:    { input: null,            error: $('#e-days'),    wrap: $('#field-days') },
+      consent: { input: $('#f-consent'), error: $('#e-consent'), wrap: $('#field-consent') }
+    };
+
+    var RULES = {
+      name: function () {
+        var v = fields.name.input.value.trim().replace(/\s+/g, ' ');
+        if (!v) return 'Please enter your full name.';
+        if (v.split(' ').length < 2) return 'Please give both a first and a last name.';
+        if (v.length < 4) return 'That name looks too short — please check it.';
+        return null;
+      },
+      id: function () {
+        var v = fields.id.input.value.trim();
+        if (!v) return 'Please enter your student number.';
+        if (!/^\d{9}$/.test(v)) return 'A student number is exactly nine digits, no letters or spaces.';
+        return null;
+      },
+      email: function () {
+        var v = fields.email.input.value.trim().toLowerCase();
+        if (!v) return 'Please enter your Benilde email.';
+        if (!/^[a-z0-9](?:[a-z0-9._%+-]*[a-z0-9])?@benilde\.edu\.ph$/.test(v)) {
+          return 'Use your Benilde address — it must end in @benilde.edu.ph.';
+        }
+        return null;
+      },
+      course: function () {
+        return fields.course.input.value ? null : 'Please choose your course.';
+      },
+      year: function () {
+        return fields.year.input.value ? null : 'Please choose your year level.';
+      },
+      days: function () {
+        return $$('input[name="days"]:checked').length ? null : 'Choose at least one day.';
+      },
+      consent: function () {
+        return fields.consent.input.checked ? null : 'We need your agreement before we can register you.';
+      }
+    };
+
+    function setError(key, message) {
+      var f = fields[key];
+      f.wrap.classList.toggle('is-invalid', !!message);
+      f.error.textContent = message ? '✕ ' + message : '';
+      if (f.input) {
+        if (message) f.input.setAttribute('aria-invalid', 'true');
+        else f.input.removeAttribute('aria-invalid');
+      }
+    }
+
+    function validate(key) {
+      var message = RULES[key]();
+      setError(key, message);
+      return !message;
+    }
+
+    // Validate on blur; once a field is marked invalid, re-check as the user fixes it.
+    Object.keys(RULES).forEach(function (key) {
+      var input = fields[key].input;
+      if (!input) return;
+      var eventName = input.tagName === 'SELECT' || input.type === 'checkbox' ? 'change' : 'blur';
+      input.addEventListener(eventName, function () { validate(key); });
+      input.addEventListener('input', function () {
+        if (fields[key].wrap.classList.contains('is-invalid')) validate(key);
+      });
+    });
+    $$('input[name="days"]').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        if (fields.days.wrap.classList.contains('is-invalid')) validate('days');
+      });
+    });
+
+    // Interest chips
+    $$('#interests .interest').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
+      });
+    });
+
+    function readStored() {
+      try {
+        var raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        var data = JSON.parse(raw);
+        return (data && data.code && data.name) ? data : null;
+      } catch (err) { return null; }
+    }
+
+    function store(data) {
+      try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+      catch (err) { /* private browsing — the session still works, it just won't persist */ }
+    }
+
+    function clearStored() {
+      try { window.localStorage.removeItem(STORAGE_KEY); } catch (err) {}
+    }
+
+    function paintOpeners(registered) {
+      openers.forEach(function (btn) {
+        if (!btn.dataset.defaultLabel) btn.dataset.defaultLabel = btn.textContent.trim();
+        btn.textContent = registered ? 'View your pass' : btn.dataset.defaultLabel;
+      });
+    }
+
+    function code() {
+      var alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      var out = '';
+      var bytes = new Uint8Array(5);
+      if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
+      else for (var j = 0; j < 5; j++) bytes[j] = Math.floor(Math.random() * 256);
+      for (var i = 0; i < 5; i++) out += alphabet[bytes[i] % alphabet.length];
+      return 'SYN26-' + out;
+    }
+
+    function showSuccess(reg) {
+      formView.hidden = true;
+      successView.hidden = false;
+      $('#s-code').textContent = reg.code;
+      $('#s-name').textContent = reg.name;
+      $('#s-id').textContent = reg.studentId;
+      $('#s-course').textContent = reg.course;
+      $('#s-days').textContent = reg.days.join(' & ');
+      successView.__reg = reg;
+    }
+
+    function showForm() {
+      successView.hidden = true;
+      formView.hidden = false;
+    }
+
+    openers.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var stored = readStored();
+        if (stored) showSuccess(stored); else showForm();
+        Dialog.open(scrim);
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var invalid = Object.keys(RULES).filter(function (key) { return !validate(key); });
+
+      if (invalid.length) {
+        summary.textContent = invalid.length === 1
+          ? 'One field still needs attention.'
+          : invalid.length + ' fields still need attention.';
+        summary.classList.add('is-shown');
+        var first = fields[invalid[0]];
+        var target = first.input || $('input', first.wrap);
+        if (target) target.focus();
+        return;
+      }
+
+      summary.classList.remove('is-shown');
+      summary.textContent = '';
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Reserving your seat';
+      var spinner = document.createElement('span');
+      spinner.className = 'spinner';
+      submitBtn.appendChild(spinner);
+
+      window.setTimeout(function () {
+        var reg = {
+          code: code(),
+          name: fields.name.input.value.trim().replace(/\s+/g, ' '),
+          studentId: fields.id.input.value.trim(),
+          email: fields.email.input.value.trim().toLowerCase(),
+          course: fields.course.input.value,
+          year: fields.year.input.value,
+          days: $$('input[name="days"]:checked').map(function (cb) { return cb.value; }),
+          interests: $$('#interests .interest[aria-pressed="true"]').map(function (c) { return c.dataset.value; }),
+          dietary: $('#f-diet').value.trim(),
+          registeredAt: new Date().toISOString()
+        };
+
+        store(reg);
+        paintOpeners(true);
+
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Complete registration';
+        if (spinner.parentNode) spinner.parentNode.removeChild(spinner);
+
+        showSuccess(reg);
+        var title = $('#success-title');
+        title.setAttribute('tabindex', '-1');
+        title.focus({ preventScroll: true });
+      }, 1200);
+    });
+
+    $('#reset-btn').addEventListener('click', function () {
+      clearStored();
+      paintOpeners(false);
+      form.reset();
+      Object.keys(RULES).forEach(function (key) { setError(key, null); });
+      $$('#interests .interest').forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
+      summary.classList.remove('is-shown');
+      showForm();
+      fields.name.input.focus();
+    });
+
+    $('#ics-btn').addEventListener('click', function () {
+      var reg = successView.__reg;
+      if (!reg) return;
+      var blob = new Blob([buildICS(reg)], { type: 'text/calendar;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'synthesis-2026-' + reg.code.toLowerCase() + '.ics';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    });
+
+    paintOpeners(!!readStored());
+  })();
+})();
+</script>
+</body>
+</html>
